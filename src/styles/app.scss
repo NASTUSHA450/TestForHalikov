@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+$magenta: #e40045;
+$darkGray: #8f9bb3;
+$darkBlue: #2e3a59;
+* {
+  font-family: "Inter", serif;
+  color: $darkBlue;
+}
+
+#navbar {
+  color: $darkGray;
+  font-size: 14px;
+  svg {
+    fill: $darkGray;
+  }
+  li .active.router-link-exact-active {
+    p {
+      color: $magenta;
+    }
+
+    background: rgba(228, 0, 68, 0.05);
+    svg {
+      fill: $magenta;
+    }
+  }
+  li:nth-child(7) {
+    margin-top: 3.5rem;
+  }
+  #menuWrap {
+    background-color: white;
+    top: 65%;
+  }
+}
+@media screen and (max-width: 639px) {
+  #navbar {
+    font-size: 11px;
+    li:nth-child(7) {
+      margin-top: 0;
+    }
+    li .active.router-link-exact-active {
+  
+      background: none;
+    }
+  }
+}
