@@ -34,6 +34,20 @@ $darkBlue: #2e3a59;
     top: 65%;
   }
 }
+#dashboard{
+  .pill{
+    font-size: 14px;
+    padding: 1.2rem 2.3rem;
+    &.active{
+      background: $magenta;
+      color: white;
+    }
+  }
+  .company-icon{
+    color: white;
+  }
+}
+
 @media screen and (max-width: 639px) {
   #navbar {
     font-size: 11px;
