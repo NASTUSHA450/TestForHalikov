@@ -18,8 +18,8 @@ body {
   overflow-x: hidden;
 }
 
-.border-gray{
-  border:1px solid $gray;
+.gray-border {
+  border: 1px solid $gray;
 }
 // scrollbars
 ::-webkit-scrollbar {
@@ -76,9 +76,17 @@ hr {
   .company-icon {
     color: white;
   }
-  #monthSelectMob::-webkit-scrollbar {
+  #monthSelectMob::-webkit-scrollbar,
+  #moTable::-webkit-scrollbar {
     display: none;
   }
+}
+#periodicMo .mo-pill:first-of-type {
+  background: linear-gradient(
+    0deg,
+    rgba(228, 0, 69, 0.10968137254901966) 0%,
+    rgba(228, 0, 69, 0) 57%
+  );
 }
 
 @media screen and (max-width: 639px) {
@@ -90,5 +98,28 @@ hr {
     li .active.router-link-exact-active {
       background: none;
     }
+  }
+}
+#moTable table,
+#employeeTable table {
+  font-size: 14px;
+  border-radius: 16px;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  tr {
+    th {
+      font-weight: 500;
+    }
+    td,
+    th {
+      padding: 1rem;
+    }
+  }
+}
+#moTable table tr th {
+  &:nth-child(2) {
+    text-align: start;
+    width: 25%;
   }
 }

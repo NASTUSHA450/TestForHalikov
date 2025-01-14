@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="pb-1 pt-2 sm:py-0 sm:mx-4 border-t sm:border-r border-solid border-gray sm:min-h-screen sm:relative fixed bottom-0"
+    class="pb-1 pt-2 sm:py-0 sm:mx-4 border-t sm:border-t-0 sm:border-r sm:border-solid border-gray sm:min-h-screen fixed bottom-0 bg-white"
     id="navbar"
   >
     <router-link :to="`/`" class="hidden sm:flex mt-7 mb-16"
       ><img src="../assets/logo.svg" alt="inspectrum clinic" class="mr-3" /><img
-        v-if="!menuWrapped"
+        v-if="!menuWrapp"
         src="../assets/logo-text.svg"
         alt="inspectrum clinic"
     /></router-link>
@@ -20,7 +20,7 @@
         <router-link
           :to="menuItem.route"
           :class="`flex sm:py-4 sm:ps-4 ${
-            menuWrapped ? 'pe-4' : 'sm:pe-14 '
+            menuWrapp ? 'pe-4' : 'sm:pe-14 '
           } rounded-bl-3xl rounded-tl-3xl sm:flex-row flex-col items-center sm:items-start`"
         >
           <svg
@@ -29,11 +29,11 @@
             :viewBox="`0 0 24 24`"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            :class="`mt-px ${menuWrapped ? '' : 'sm:mr-3'} sm:mb-0 mb-1`"
+            :class="`mt-px ${menuWrapp ? '' : 'sm:mr-3'} sm:mb-0 mb-1`"
           >
             <path fill-rule="evenodd" clip-rule="evenodd" :d="menuItem.path" />
           </svg>
-          <p v-if="!menuWrapped" class="text-darkGray">
+          <p v-if="!menuWrapp || windowWidth < 640" class="text-darkGray">
             {{ menuItem.name }}
           </p></router-link
         >
@@ -63,7 +63,7 @@
       </li>
     </ul>
     <button
-      @click="menuWrapped = !menuWrapped"
+      @click="toggleMenu()"
       class="hidden sm:block border border-solid border-gray rounded-3xl py-4 px-1 absolute -right-2"
       id="menuWrap"
     >
@@ -76,7 +76,7 @@
       >
         <path
           :d="
-            !menuWrapped
+            !menuWrapp
               ? `M5.42969 9L1.42969 5L5.42969 1`
               : 'M1.42969 9L5.42969 5L1.42969 1'
           "
@@ -127,11 +127,11 @@
 </template>
 
 <script>
+import { getters,mutations } from "../store/index.js";
 import vClickOutside from "click-outside-vue3";
 export default {
   name: "Navbar-component",
   data: () => ({
-    menuWrapped: false,
     moreMenuMobileshow: false,
     windowWidth: window.innerWidth,
     menuItems: [
@@ -199,7 +199,7 @@ export default {
   watch: {
     windowWidth() {
       if(this.windowWidth < 640){
-        this.menuWrapped = false;
+        this.menuWrapp = false;
       }
     },
   },
@@ -214,11 +214,17 @@ export default {
         return idx !== 0 && idx !== 1 && idx !== 2 && idx !== 4 && idx !== 5;
       });
     },
+    menuWrapp(){
+      return getters.menuWrapp()
+    }
   },
   methods: {
     onClickOutside() {
       this.moreMenuMobileshow = false;
     },
+    toggleMenu(){
+      mutations.togglemenuWrapped();
+    }
   },
   mounted() {
     window.onresize = () => {
