@@ -1,53 +1,53 @@
 <template>
   <div id="dashboard" class="mt-4 w-full">
     <div class="flex justify-between w-full pe-5 ps-5">
-      <div class="sm:flex items-center">
+      <div class="lg:flex items-center">
         <h1 class="text-2xl font-semibold mr-5">Дашбоард</h1>
         <div
-          class="rounded-[87px] border border-solid border-gray flex p-1 mt-4 sm:mt-0"
+          class="rounded-[87px] border border-solid border-gray flex p-1 mt-4 lg:mt-0"
         >
           <button
             @click="activateStats()"
             :class="`pill ${
               statsActive ? 'bg-magenta text-white' : 'text-darkGray'
-            } rounded-[87px]`"
+            } rounded-full`"
           >
             Статистика</button
           ><button
             @click="activateRisks()"
             :class="`pill ${
               risksActive ? 'bg-magenta text-white' : 'text-darkGray'
-            } rounded-[87px]`"
+            } rounded-full`"
           >
             Риски
           </button>
         </div>
       </div>
       <div
-        class="flex sm:items-center sm:flex-row flex-col-reverse sm:mb-0 mb-[16px]"
+        class="flex lg:items-center lg:flex-row flex-col-reverse lg:mb-0 mb-[16px]"
       >
         <div class="flex items-center">
           <div
-            class="company-icon rounded-full bg-magenta w-[44px] h-[44px] flex justify-center items-center text-base font-semibold sm:mr-4"
+            class="company-icon rounded-full bg-magenta w-[44px] h-[44px] flex justify-center items-center text-base font-semibold lg:mr-4"
           >
             O
           </div>
-          <div class="mr-9 hidden sm:block">
+          <div class="mr-9 hidden lg:block">
             <h3 class="text-base font-semibold">OOO "МОДУЛЬ"</h3>
             <span class="text-[14px] text-gray">Компания</span>
           </div>
         </div>
         <div
-          class="flex sm:mb-0 mb-5 sm:pb-0 pb-1 sm:justify-start justify-center"
+          class="flex lg:mb-0 mb-5 lg:pb-0 pb-1 lg:justify-start justify-center"
         >
-          <div class="relative sm:mr-4">
+          <div class="relative mr-4 hidden lg:block">
             <img src="../assets/cart.svg" alt="cart" />
             <span
               class="absolute -top-1 -right-2 w-[16px] h-[16px] bg-blue rounded-full text-[11px] flex justify-center items-center text-white"
               >{{ getCartTotal }}</span
             >
           </div>
-          <div class="relative sm:mr-4">
+          <div class="relative lg:mr-4">
             <img src="../assets/bell.svg" alt="notifications" />
             <span
               class="absolute -top-1 -right-2 w-[16px] h-[16px] bg-blue rounded-full text-[11px] flex justify-center items-center text-white"
@@ -59,20 +59,22 @@
     </div>
     <hr class="my-4 sm:hidden" />
     <div v-if="statsActive">
-      <div class="pt-4 mt-4 pe-5 ps-5">
+      <div class="sm:pt-4 mt-4 pe-5 ps-5">
         <ChooseMonth :months="months" />
       </div>
       <div class="pe-5 ps-5">
-        <div class="flex">
-          <div class="sm:w-3/5 sm:mr-5">
+        <div class="2xl:flex">
+          <div class="2xl:w-3/5 lg:mr-5">
             <EmployeeStatus :months="months" :moTypes="moTypes" />
+            <PeriodicMo class="sm:hidden" />
             <MoPassedStatus :moTypes="moTypes" />
           </div>
-          <div class="sm:w-2/5">
-            <PeriodicMo />
-            <EmployeeList />
+          <div class="2xl:w-2/5">
+            <PeriodicMo class="hidden sm:block" />
+            <EmployeeList class="hidden sm:block" />
           </div>
         </div>
+        <Recomendations class="sm:hidden" />
       </div>
     </div>
     <div v-if="risksActive" class="bg-orange bg-green">риски</div>
@@ -85,6 +87,7 @@ import EmployeeStatus from "../components/EmployeeStatus.vue";
 import MoPassedStatus from "../components/MoPassedStatus.vue";
 import PeriodicMo from "../components/PeriodicMo.vue";
 import EmployeeList from "../components/EmployeeList.vue";
+import Recomendations from "../components/Recomendations.vue";
 export default {
   name: "Dashboard-Page",
   components: {
@@ -93,12 +96,14 @@ export default {
     MoPassedStatus,
     PeriodicMo,
     EmployeeList,
+    Recomendations,
   },
   data: () => ({
     statsActive: true,
     risksActive: false,
     cartCount: 1,
     notificationsCount: 1,
+    windowWidth: window.innerWidth,
     months: [
       "январь",
       "февраль",
@@ -151,6 +156,11 @@ export default {
       this.statsActive = false;
       this.risksActive = true;
     },
+  },
+  mounted() {
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth;
+    };
   },
 };
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div id="periodicMo">
     <h4 class="text-base font-semibold mt-5 mb-3">Периодический МО</h4>
-    <div class="flex gap-x-4">
+    <div class="disable-scroll flex gap-x-4 overflow-x-scroll">
       <div
         v-for="(stat, idx) in periodicMoStats"
         :key="idx"
-        class="gray-border rounded-[16px] p-3 first:border-magenta first:border-2 mo-pill"
+        class="gray-border rounded-[16px] p-3 first:border-magenta first:border-2 mo-pill min-w-[220px] sm:w-auto"
       >
         <p class="text-[22px] font-semibold">{{ stat.count }}</p>
         <span class="uppercase text-[11px] text-darkGray">сотрудников</span>

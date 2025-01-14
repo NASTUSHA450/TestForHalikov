@@ -1,7 +1,7 @@
 <template>
   <div
     @click="selectOpen = !selectOpen"
-    class="relative text-[14px] border border-solid border-gray w-2/5 p-4 rounded-[8px] bg-[#F7F9FC] justify-between cursor-pointer hidden sm:flex w-[170px]"
+    class="relative text-[14px] border border-solid border-gray w-2/5 p-4 rounded-[8px] bg-[#F7F9FC] justify-between cursor-pointer hidden md:flex w-[170px]"
   >
     <p class="capitalize">{{ getChosenMonth }}</p>
     <div
@@ -41,7 +41,7 @@
   </div>
   <div
     id="monthSelectMob"
-    class="sm:hidden sm:pe-10 pe-14 w-screen overflow-x-scroll overflow-y-visible"
+    class="md:hidden md:pe-10 pe-14 w-screen overflow-x-scroll overflow-y-visible"
   >
     <div class="border-solid border border-gray rounded-full p-1 w-max flex">
       <a

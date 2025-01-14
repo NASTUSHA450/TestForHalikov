@@ -11,16 +11,14 @@
     /></router-link>
     <ul class="flex sm:block sm:w-auto w-screen">
       <li
-        v-for="(menuItem, idx) in windowWidth >= 640
-          ? menuItems
-          : filterMobileMenu"
+        v-for="(menuItem, idx) in displayMenu"
         :key="idx"
         class="sm:w-auto w-1/5"
       >
         <router-link
           :to="menuItem.route"
           :class="`flex sm:py-4 sm:ps-4 ${
-            menuWrapp ? 'pe-4' : 'sm:pe-14 '
+            menuWrapp ? 'pe-4' : 'lg:pe-14 pe-8'
           } rounded-bl-3xl rounded-tl-3xl sm:flex-row flex-col items-center sm:items-start`"
         >
           <svg
@@ -204,6 +202,9 @@ export default {
     },
   },
   computed: {
+    displayMenu(){
+      return this.windowWidth < 640 ? this.filterMobileMenu : this.menuItems;
+    },
     filterMobileMenu() {
       return this.menuItems.filter((item, idx) => {
         return idx !== 3 && idx < 5;
