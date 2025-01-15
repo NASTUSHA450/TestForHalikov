@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <h4 class="text-base font-semibold mt-5 mb-3">
       Количество сотрудников, подлежащих МО в 2024 году
     </h4>

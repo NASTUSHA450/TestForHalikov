@@ -94,6 +94,7 @@
     </button>
     <div
       v-if="moreMenuMobileshow"
+      v-click-outside="onClickOutside"
       class="absolute -top-52 right-3 bg-white px-1 pt-4 b-gray rounded-sm sm:hidden"
     >
       <ul>
@@ -231,7 +232,7 @@ export default {
   watch: {
     windowWidth() {
       if (this.windowWidth < 640) {
-        this.menuWrapp = false;
+        mutations.togglemenuWrapped(false);
       }
     },
   },
@@ -253,6 +254,9 @@ export default {
   methods: {
     toggleMenu() {
       mutations.togglemenuWrapped();
+    },
+    onClickOutside() {
+      console.log("out");
     },
   },
   mounted() {

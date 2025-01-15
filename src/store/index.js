@@ -23,10 +23,14 @@ export const getters = {
 }
 
 export const mutations = {
-    togglemenuWrapped(){
+    togglemenuWrapped(bool){
         store.menuWrapped = !store.menuWrapped
+        if(bool){
+            store.menuWrapped = bool;
+        }
     },
     updateChosenMonth(month){
         store.chosenMonth = month
     }
+    
 };
