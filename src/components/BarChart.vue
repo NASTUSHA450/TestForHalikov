@@ -3,11 +3,11 @@
     <h4 class="text-base font-semibold mt-5 mb-3">
       Количество сотрудников, подлежащих МО в 2024 году
     </h4>
-    <div class="gray-border p-5 rounded-[16px]">
+    <div class="b-gray p-5 rounded-md">
       <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
       <div class="flex flex-col sm:flex-row mt-5">
-        <div v-for="(m, idx) in moTypes" :key="idx" class="flex items-center mr-5 text-[12px] sm:mb-0 mb-3">
-          <div :class="`h-[16px] w-[16px] bg-${m.color} rounded-full mr-2`"></div>
+        <div v-for="(m, idx) in moTypes" :key="idx" class="flex items-center mr-5 text-sm sm:mb-0 mb-3">
+          <div :class="`h-4 w-4 bg-${m.color} rounded-full mr-2`"></div>
           {{ m.name }} MO
         </div>
       </div>

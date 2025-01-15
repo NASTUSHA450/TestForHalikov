@@ -1,13 +1,13 @@
 <template>
-  <div class="">
+  <div>
     <h4 class="text-base font-semibold mt-5 mb-3">Список сотрудников общий</h4>
     <div class="overflow-x-scroll h-full" id="employeeTable">
-      <div class="gray-border rounded-[8px]">
+      <div class="b-gray rounded-sm h-full flex flex-col justify-between">
         <table width="100%" class=" overflow-x-scroll">
-          <thead class="border-b border-gray border-solid">
-            <tr class="bg-[#F7F9FC] rounded-tr-xl rounded-tl-xl">
-              <th class="rounded-tl-xl text-start">№</th>
-              <th class="text-start">ФИО</th>
+          <thead>
+            <tr class="bg-light rounded-tr-sm rounded-tl-sm">
+              <th class="rounded-tl-sm">№</th>
+              <th >ФИО</th>
               <th>Статус</th>
               <th>Дата записи</th>
             </tr>
@@ -31,6 +31,10 @@
             </tr>
           </tbody>
         </table>
+        <div class="flex gap-x-2 p-4 mt-10">
+          <button class="w-1/2 rounded-sm py-2 text-center b-gray text-magenta">Скачать список</button>
+          <button class="w-1/2 rounded-sm py-2 text-center bg-magenta text-white">Записать на МО</button>
+        </div>
       </div>
     </div>
   </div>

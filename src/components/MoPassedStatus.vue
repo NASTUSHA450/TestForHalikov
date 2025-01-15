@@ -3,17 +3,17 @@
     <h4 class="text-base font-semibold mt-5 mb-3">
       Статус прохождения МО в октябре 2024 года
     </h4>
-    <div class="overflow-x-scroll" id="moTable">
-      <table width="100%"  class="gray-border overflow-x-scroll">
-        <thead class="border-b border-gray border-solid">
-          <tr class="bg-[#F7F9FC] rounded-tr-xl rounded-tl-xl">
-            <th class="rounded-tl-xl">№</th>
+    <div class="overflow-x-scroll hide-scroll">
+      <table width="100%" class="b-gray rounded-sm">
+        <thead>
+          <tr class="bg-light rounded-tr-sm rounded-tl-sm ">
+            <th class="rounded-tl-sm ">№</th>
             <th>Вид МО</th>
             <th>Подлежат МО</th>
             <th>Записано</th>
             <th>Проходят</th>
             <th>Пройдено</th>
-            <th class="rounded-tr-xl">Не пришли</th>
+            <th class="rounded-tr-sm">Не пришли</th>
           </tr>
         </thead>
         <tbody>
@@ -21,15 +21,15 @@
             <td>{{ idx + 1 }}</td>
             <td class="flex items-center">
               <div
-                :class="`h-[16px] w-[16px] bg-${type.color} rounded-full mr-2`"
+                :class="`h-4 w-4 bg-${type.color} rounded-full mr-2`"
               ></div>
               {{ type.name }}
             </td>
-            <td>{{ type.subject }}</td>
-            <td>{{ type.recorded }}</td>
-            <td>{{ type.passing }}</td>
-            <td>{{ type.passed }}</td>
-            <td>{{ type.notDelivered }}</td>
+            <td class="text-center">{{ type.subject }}</td>
+            <td class="text-center">{{ type.recorded }}</td>
+            <td class="text-center">{{ type.passing }}</td>
+            <td class="text-center">{{ type.passed }}</td>
+            <td class="text-center">{{ type.notDelivered }}</td>
           </tr>
         </tbody>
       </table>

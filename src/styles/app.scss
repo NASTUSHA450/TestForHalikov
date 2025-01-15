@@ -2,129 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-$magenta: #e40045;
-$darkGray: #8f9bb3;
-$darkBlue: #2e3a59;
-$gray: #e4e9f2;
 * {
-  font-family: "Inter", serif;
-  color: $darkBlue;
+  @apply text-darkBlue font-inter;
 }
-
 html,
 body {
-  margin: 0;
-  height: 100%;
-  overflow-x: hidden;
+  @apply m-0 h-full overflow-x-hidden;
 }
-
-.gray-border {
-  border: 1px solid $gray;
-}
-// scrollbars
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: $gray;
-  border: 2px solid white;
+a{
+  @apply cursor-pointer
 }
 hr {
-  border-bottom: 1px solid $gray;
-  border-top: 0;
+  @apply border-b border-t-0 border-solid border-gray;
 }
-.blur {
-  filter: blur(25px);
+.b-gray {
+  @apply border border-solid border-gray;
 }
-
-#navbar {
-  color: $darkGray;
-  font-size: 14px;
-  svg {
-    fill: $darkGray;
-  }
-  li .active.router-link-exact-active {
-    p {
-      color: $magenta;
-    }
-
-    background: rgba(228, 0, 68, 0.05);
-    svg {
-      fill: $magenta;
-    }
-  }
-  li:nth-child(7) {
-    margin-top: 3.5rem;
-  }
-  #menuWrap {
-    background-color: white;
-    top: 65%;
-  }
+.center-all {
+  @apply flex justify-center items-center;
 }
-#dashboard {
-  .pill {
-    font-size: 14px;
-    padding: 1rem 2.3rem;
-  }
-  .company-icon {
-    color: white;
-  }
-  #monthSelectMob::-webkit-scrollbar,
-  #moTable::-webkit-scrollbar,
-  #periodicMo .disable-scroll::-webkit-scrollbar {
-    display: none;
-  }
-  
+.notification {
+  @apply absolute -top-1 -right-2 w-4 h-4 bg-blue rounded-full text-xs flex justify-center items-center text-white;
 }
-#periodicMo .mo-pill:first-of-type {
-  background: linear-gradient(
-    0deg,
-    rgba(228, 0, 69, 0.10968137254901966) 0%,
-    rgba(228, 0, 69, 0) 57%
-  );
+table {
+  @apply text-tiny rounded-md border-separate border-spacing-0;
+}
+table thead tr th {
+  @apply text-center font-medium;
+}
+table thead tr th,
+table tbody tr td {
+  @apply p-4;
+}
+table tbody tr:first-of-type td{
+  @apply  border-t border-solid border-gray
+}
+table thead tr th:nth-child(1),
+table thead tr th:nth-child(2) {
+  @apply text-start;
+}
+.hide-scroll::-webkit-scrollbar {
+  @apply hidden;
+}
+.pill {
+  @apply text-tiny py-4 px-9 rounded-full;
 }
 
-@media screen and (max-width: 639px) {
-  #navbar {
-    font-size: 11px;
-    li:nth-child(7) {
-      margin-top: 0;
-    }
-    li .active.router-link-exact-active {
-      background: none;
-    }
-  }
+// scrollbars
+::-webkit-scrollbar {
+  @apply w-3;
 }
-#moTable table,
-#employeeTable table {
-  font-size: 14px;
-  border-radius: 16px;
-  border-spacing: 0;
-  border-collapse: separate;
-  border-radius: 10px;
-  tr {
-    th {
-      font-weight: 500;
-    }
-    td,
-    th {
-      padding: 1rem;
-    }
-  }
+::-webkit-scrollbar-track{
+  @apply rounded-full
 }
-#moTable table tr th {
-  &:nth-child(2) {
-    text-align: start;
-    // width: 25%;
-  }
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray border-2 border-solid border-white
 }
+

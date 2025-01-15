@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="pb-1 pt-2 sm:py-0 sm:mx-4 border-t sm:border-t-0 sm:border-r sm:border-solid border-gray sm:min-h-screen fixed bottom-0 bg-white"
+    class="z-50 pb-1 pt-2 sm:py-0 sm:mx-4 border-t sm:border-t-0 sm:border-r sm:border-solid border-gray sm:min-h-screen fixed bottom-0 bg-white text-darkGray text-xs sm:text-tiny"
     id="navbar"
   >
     <router-link :to="`/`" class="hidden sm:flex mt-7 mb-16"
@@ -11,15 +11,15 @@
     /></router-link>
     <ul class="flex sm:block sm:w-auto w-screen">
       <li
-        v-for="(menuItem, idx) in displayMenu"
+        v-for="(menuItem, idx) in menuItems"
         :key="idx"
-        class="sm:w-auto w-1/5"
+        class="sm:w-auto w-1/5 hidden sm:block"
       >
         <router-link
           :to="menuItem.route"
           :class="`flex sm:py-4 sm:ps-4 ${
             menuWrapp ? 'pe-4' : 'lg:pe-14 pe-8'
-          } rounded-bl-3xl rounded-tl-3xl sm:flex-row flex-col items-center sm:items-start`"
+          } rounded-bl-md rounded-tl-md sm:flex-row flex-col items-center sm:items-start`"
         >
           <svg
             :width="menuItem.width"
@@ -31,6 +31,32 @@
           >
             <path fill-rule="evenodd" clip-rule="evenodd" :d="menuItem.path" />
           </svg>
+          <p v-if="!menuWrapp" class="text-darkGray pt-1">
+            {{ menuItem.name }}
+          </p></router-link
+        >
+      </li>
+      <li
+        v-for="(menuItem, idx) in filterMobileMenu"
+        :key="idx"
+        class="sm:w-auto w-1/5 sm:hidden"
+      >
+        <router-link
+          :to="menuItem.route"
+          :class="`flex ${
+            menuWrapp ? 'pe-4' : ' pe-8'
+          } rounded-bl-md rounded-tl-md sm:flex-row flex-col items-center`"
+        >
+          <svg
+            :width="menuItem.width"
+            :height="menuItem.height"
+            :viewBox="`0 0 24 24`"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            :class="`mt-px mb-1`"
+          >
+            <path fill-rule="evenodd" clip-rule="evenodd" :d="menuItem.path" />
+          </svg>
           <p v-if="!menuWrapp || windowWidth < 640" class="text-darkGray">
             {{ menuItem.name }}
           </p></router-link
@@ -38,8 +64,7 @@
       </li>
       <li
         @click="moreMenuMobileshow = !moreMenuMobileshow"
-        v-if="windowWidth < 640"
-        class="w-1/5 flex justify-center"
+        class="w-1/5 flex justify-center sm:hidden"
       >
         <button>
           <svg
@@ -62,33 +87,14 @@
     </ul>
     <button
       @click="toggleMenu()"
-      class="hidden sm:block border border-solid border-gray rounded-3xl py-4 px-1 absolute -right-2"
-      id="menuWrap"
+      class="hidden sm:block b-gray rounded-3md py-4 px-1 absolute -right-2 bg-white rounded-md bottom-96"
     >
-      <svg
-        width="7"
-        height="10"
-        viewBox="0 0 7 10"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          :d="
-            !menuWrapp
-              ? `M5.42969 9L1.42969 5L5.42969 1`
-              : 'M1.42969 9L5.42969 5L1.42969 1'
-          "
-          stroke="#8F9BB3"
-          stroke-width="1.16667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <img v-if="menuWrapp" src="../assets/arrow-right.svg" alt="" />
+      <img v-else src="../assets/arrow-left.svg" alt="" />
     </button>
     <div
       v-if="moreMenuMobileshow"
-      v-click-outside="onClickOutside"
-      class="absolute -top-48 right-5"
+      class="absolute -top-52 right-3 bg-white px-1 pt-4 b-gray rounded-sm sm:hidden"
     >
       <ul>
         <li
@@ -123,10 +129,41 @@
     </div>
   </nav>
 </template>
+<style lang="scss" scoped>
+$magenta: #e40045;
+$darkGray: #8f9bb3;
+#navbar {
+  svg {
+    fill: $darkGray;
+  }
+  li .active.router-link-exact-active {
+    p {
+      color: $magenta;
+    }
+    background: rgba(228, 0, 68, 0.05);
+    svg {
+      fill: $magenta;
+    }
+  }
+  li:nth-child(7) {
+    margin-top: 3.5rem;
+  }
+}
 
+@media screen and (max-width: 639px) {
+  #navbar {
+    // font-size: 11px;
+    li:nth-child(7) {
+      margin-top: 0;
+    }
+    li .active.router-link-exact-active {
+      background: none;
+    }
+  }
+}
+</style>
 <script>
-import { getters,mutations } from "../store/index.js";
-import vClickOutside from "click-outside-vue3";
+import { getters, mutations } from "../store/index.js";
 export default {
   name: "Navbar-component",
   data: () => ({
@@ -191,20 +228,14 @@ export default {
       },
     ],
   }),
-  directives: {
-    clickOutside: vClickOutside.directive,
-  },
   watch: {
     windowWidth() {
-      if(this.windowWidth < 640){
+      if (this.windowWidth < 640) {
         this.menuWrapp = false;
       }
     },
   },
   computed: {
-    displayMenu(){
-      return this.windowWidth < 640 ? this.filterMobileMenu : this.menuItems;
-    },
     filterMobileMenu() {
       return this.menuItems.filter((item, idx) => {
         return idx !== 3 && idx < 5;
@@ -215,17 +246,14 @@ export default {
         return idx !== 0 && idx !== 1 && idx !== 2 && idx !== 4 && idx !== 5;
       });
     },
-    menuWrapp(){
-      return getters.menuWrapp()
-    }
+    menuWrapp() {
+      return getters.menuWrapp();
+    },
   },
   methods: {
-    onClickOutside() {
-      this.moreMenuMobileshow = false;
-    },
-    toggleMenu(){
+    toggleMenu() {
       mutations.togglemenuWrapped();
-    }
+    },
   },
   mounted() {
     window.onresize = () => {

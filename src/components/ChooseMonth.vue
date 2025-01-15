@@ -1,11 +1,11 @@
 <template>
   <div
     @click="selectOpen = !selectOpen"
-    class="relative text-[14px] border border-solid border-gray w-2/5 p-4 rounded-[8px] bg-[#F7F9FC] justify-between cursor-pointer hidden md:flex w-[170px]"
+    class="relative text-tiny b-gray p-4 rounded-sm bg-light justify-between cursor-pointer hidden md:flex w-40"
   >
     <p class="capitalize">{{ getChosenMonth }}</p>
     <div
-      class="w-[24px] h-[24px] bg-blue rounded-full flex justify-center items-center"
+      class="w-6 h-6 bg-blue rounded-full center-all"
     >
       <svg
         width="8"
@@ -28,7 +28,7 @@
     </div>
     <div
       v-if="selectOpen"
-      class="absolute top-16 left-0 w-full bg-white border border-solid border-gray rounded-[8px] h-[150px] overflow-y-scroll flex flex-col"
+      class="absolute top-16 left-0 w-full bg-white b-gray rounded-sm h-40 overflow-y-scroll flex flex-col"
     >
       <a
         @click="updateMonth(month)"
@@ -40,17 +40,16 @@
     </div>
   </div>
   <div
-    id="monthSelectMob"
-    class="md:hidden md:pe-10 pe-14 w-screen overflow-x-scroll overflow-y-visible"
+    class="md:hidden md:pe-10 pe-14 w-screen overflow-x-scroll overflow-y-visible hide-scroll"
   >
-    <div class="border-solid border border-gray rounded-full p-1 w-max flex">
+    <div class="b-gray rounded-full p-1 w-max flex">
       <a
         v-for="(month, idx) in months"
         :key="idx"
         @click="updateMonth(month)"
         :class="`${
           month === getChosenMonth ? 'bg-blue text-white' : ''
-        } pill capitalize rounded-full text-darkGray`"
+        } pill capitalize text-darkGray`"
       >
         {{ month }}
       </a>
