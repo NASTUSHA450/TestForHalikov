@@ -72,7 +72,7 @@
           </div>
           <div class="2xl:w-2/5">
             <PeriodicMo class="hidden sm:block h-auto 2xl:h-1/6" />
-            <EmployeeList class="hidden sm:block h-auto 2xl:h-4/5 pb-8" />
+            <EmployeeList class="hidden sm:block h-auto 2xl:h-4/5 pb-7" />
           </div>
         </div>
         <Recomendations class="sm:hidden" />
